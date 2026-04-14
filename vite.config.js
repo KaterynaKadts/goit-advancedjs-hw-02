@@ -9,11 +9,11 @@ export default defineConfig(({ command }) => {
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
-    root: 'src', // Указываем, что исходники в папке src
+    root: 'src', 
     build: {
       sourcemap: true,
       rollupOptions: {
-        // Ищем файлы в папке src, но передаем только их имена
+       
         input: globSync('./src/*.html'),
         output: {
           manualChunks(id) {
@@ -35,10 +35,10 @@ export default defineConfig(({ command }) => {
           },
         },
       },
-      outDir: '../dist', // Сборка будет в папке dist в корне проекта
+      outDir: '../dist',
       emptyOutDir: true,
     },
-    // Правильное место для плагинов PostCSS
+   
     css: {
       postcss: {
         plugins: [
@@ -48,7 +48,7 @@ export default defineConfig(({ command }) => {
         ],
       },
     },
-    // Только плагины Vite
+    
     plugins: [
       injectHTML(),
       FullReload(['./src/**/**.html']),
