@@ -1,5 +1,4 @@
 import iziToast from 'izitoast';
-
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
@@ -7,34 +6,36 @@ const form = document.querySelector('.form');
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const delayValue = Number(form.elements.delay.value);
-  const state = form.elements.state.value; // 'fulfilled' or 'rejected'
+  // Берем значения из формы
+  const delay = Number(form.elements.delay.value);
+  const state = form.elements.state.value;
 
+  // Создаем промис согласно заданию
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (state === 'fulfilled') {
-        resolve(delayValue);
+        resolve(delay);
       } else {
-        reject(delayValue);
+        reject(delay);
       }
-    }, delayValue);
+    }, delay);
   });
 
+  // Обрабатываем промис
   promise
     .then(delay => {
-      iziToast.show({
+      iziToast.success({
         message: `✅ Fulfilled promise in ${delay}ms`,
-        backgroundColor: '#00cc66',
         position: 'topRight',
-        timeout: 3000,
       });
     })
     .catch(delay => {
-      iziToast.show({
+      iziToast.error({
         message: `❌ Rejected promise in ${delay}ms`,
-        backgroundColor: '#cc0000',
-        position: 'topLeft',
-        timeout: 3000,
+        position: 'topRight',
       });
     });
+
+  // Очищаем форму
+  form.reset();
 });

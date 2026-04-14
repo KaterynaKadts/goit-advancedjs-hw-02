@@ -2,41 +2,86 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page 3</title>
+    <title>Homework 10 - Snackbar</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <style>
+      /* Стили для соответствия макету */
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 360px;
+        padding: 24px;
+      }
+      fieldset {
+        display: flex;
+        gap: 16px;
+        border: 1px solid #808080;
+        border-radius: 4px;
+        padding: 16px;
+      }
+      legend {
+        padding: 0 8px;
+        font-size: 14px;
+      }
+      .form label {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 16px;
+      }
+      .form input[type="number"] {
+        padding: 8px;
+        border: 1px solid #808080;
+        border-radius: 4px;
+        outline: none;
+      }
+      button[type="submit"] {
+        padding: 8px 16px;
+        background-color: #4e75ff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      button[type="submit"]:hover {
+        background-color: #6c8cff;
+      }
+    </style>
   </head>
   <body>
-    <form class="form">
-      <label>
-        Delay (ms)
-        <input type="number" name="delay" required />
-      </label>
+    <load src="./partials/header.html" />
 
-      <fieldset>
-        <legend>State</legend>
+    <main class="container">
+      <a href="./index.html" class="back-link">Go back</a>
+      
+      <h1>Promise Generator</h1>
+
+      <form class="form">
         <label>
-          <input type="radio" name="state" value="fulfilled" required />
-          Fulfilled
+          Delay (ms)
+          <input type="number" name="delay" required />
         </label>
-        <label>
-          <input type="radio" name="state" value="rejected" required />
-          Rejected
-        </label>
-      </fieldset>
 
-      <button type="submit">Create notification</button>
-    </form>
+        <fieldset>
+          <legend>State</legend>
+          <label>
+            <input type="radio" name="state" value="fulfilled" required />
+            Fulfilled
+          </label>
+          <label>
+            <input type="radio" name="state" value="rejected" required />
+            Rejected
+          </label>
+        </fieldset>
 
-    <main>
-      <div class="container">
-        <h1 class="main-title">
-          <span class="main-title-gradient">Welcome</span> to page 3
-        </h1>
-        <load src="./partials/back-link.html" />
-      </div>
+        <button type="submit">Create notification</button>
+      </form>
     </main>
+
     <script type="module" src="./js/2-snackbar.js"></script>
   </body>
 </html>
