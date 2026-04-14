@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { glob } from 'glob';
+import { globSync } from 'glob'; // Используем globSync для версии 11
 import injectHTML from 'vite-plugin-html-inject';
 import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
@@ -9,11 +9,12 @@ export default defineConfig(({ command }) => {
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
-    root: 'src',
+    root: 'src', // Указываем, что исходники в папке src
     build: {
       sourcemap: true,
       rollupOptions: {
-        input: glob.sync('./src/*.html'),
+        // Ищем файлы в папке src, но передаем только их имена
+        input: globSync('./src/*.html'),
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
@@ -34,15 +35,23 @@ export default defineConfig(({ command }) => {
           },
         },
       },
-      outDir: '../dist',
+      outDir: '../dist', // Сборка будет в папке dist в корне проекта
       emptyOutDir: true,
     },
+    // Правильное место для плагинов PostCSS
+    css: {
+      postcss: {
+        plugins: [
+          SortCss({
+            sort: 'mobile-first',
+          }),
+        ],
+      },
+    },
+    // Только плагины Vite
     plugins: [
       injectHTML(),
       FullReload(['./src/**/**.html']),
-      SortCss({
-        sort: 'mobile-first',
-      }),
     ],
   };
 });
